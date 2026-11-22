@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "LeadHunter Chrome Connect",
+  "version": "2.3.11",
+  "description": "Instagram через ваш Chrome. Задания только от явно подключённого локального LeadHunter; пароли и cookies не читаются.",
+  "permissions": [
+    "storage",
+    "alarms"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1/*",
+    "https://www.instagram.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "LeadHunter Chrome Connect"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.instagram.com/*"
+      ],
+      "js": [
+        "instagram.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "http://127.0.0.1/connect*"
+      ],
+      "js": [
+        "pair.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "minimum_chrome_version": "120"
+}
